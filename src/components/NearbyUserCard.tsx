@@ -14,6 +14,7 @@ import {
 	Work as WorkIcon,
 } from '@mui/icons-material';
 import { NearbyUser } from '../stores/locationStore';
+import { getMediaUrl } from '../services/api';
 
 interface NearbyUserCardProps {
 	user: NearbyUser;
@@ -54,7 +55,7 @@ export default function NearbyUserCard({ user, onClick, onChatClick }: NearbyUse
 			<CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
 				{/* Avatar */}
 				<Avatar
-					src={user.photoUrl || undefined}
+					src={getMediaUrl(user.photoUrl)}
 					sx={{
 						width: 64,
 						height: 64,

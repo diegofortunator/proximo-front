@@ -3,6 +3,17 @@ import { useAuthStore } from '../stores/authStore';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
+// Helper para construir URLs completas de mídia (fotos, uploads)
+export const getMediaUrl = (path: string | null | undefined): string | undefined => {
+  if (!path) return undefined;
+  // Se já é uma URL completa, retorna como está
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    return path;
+  }
+  // Se é um caminho relativo, adiciona a URL da API
+  return `${API_URL}${path}`;
+};
+
 export const api = axios.create({
   baseURL: `${API_URL}/api`,
   headers: {

@@ -23,7 +23,7 @@ import {
 	Cake as CakeIcon,
 } from '@mui/icons-material';
 import { useAuthStore } from '../stores/authStore';
-import { profileApi } from '../services/api';
+import { profileApi, getMediaUrl } from '../services/api';
 
 const maritalStatusLabels: Record<string, string> = {
 	SINGLE: 'Solteiro(a)',
@@ -101,7 +101,7 @@ export default function Profile() {
 					<CardContent sx={{ textAlign: 'center', pt: 3 }}>
 						{/* Avatar */}
 						<Avatar
-							src={user?.profile?.photoUrl || undefined}
+							src={getMediaUrl(user?.profile?.photoUrl)}
 							sx={{
 								width: 100,
 								height: 100,

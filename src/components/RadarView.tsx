@@ -1,5 +1,6 @@
 import { Box, Avatar, Typography, Tooltip } from '@mui/material';
 import { NearbyUser } from '../stores/locationStore';
+import { getMediaUrl } from '../services/api';
 
 interface RadarViewProps {
 	users: NearbyUser[];
@@ -123,7 +124,7 @@ export default function RadarView({ users, onUserClick }: RadarViewProps) {
 						arrow
 					>
 						<Avatar
-							src={user.photoUrl || undefined}
+							src={getMediaUrl(user.photoUrl)}
 							onClick={() => onUserClick(user)}
 							sx={{
 								position: 'absolute',

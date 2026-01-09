@@ -27,7 +27,7 @@ import {
 	Close as CloseIcon,
 } from '@mui/icons-material';
 import { useGroupStore, GroupMessage } from '../stores/groupStore';
-import { groupsApi, uploadApi } from '../services/api';
+import { groupsApi, uploadApi, getMediaUrl } from '../services/api';
 import { socketService } from '../services/socket';
 
 export default function GroupChat() {
@@ -235,7 +235,7 @@ export default function GroupChat() {
 						>
 							{!msg.isMine && (
 								<Avatar
-									src={msg.sender.photoUrl || undefined}
+									src={getMediaUrl(msg.sender.photoUrl)}
 									sx={{ width: 32, height: 32, mr: 1, mt: 0.5 }}
 								>
 									{msg.sender.name?.charAt(0).toUpperCase() || '?'}
@@ -389,7 +389,7 @@ export default function GroupChat() {
 						{currentGroup?.members.map((member) => (
 							<ListItem key={member.userId}>
 								<ListItemAvatar>
-									<Avatar src={member.photoUrl || undefined}>
+									<Avatar src={getMediaUrl(member.photoUrl)}>
 										{member.name?.charAt(0).toUpperCase()}
 									</Avatar>
 								</ListItemAvatar>

@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import { Chat as ChatIcon } from '@mui/icons-material';
 import { useChatStore } from '../stores/chatStore';
-import { chatApi } from '../services/api';
+import { chatApi, getMediaUrl } from '../services/api';
 
 export default function ConversationsList() {
 	const navigate = useNavigate();
@@ -70,7 +70,7 @@ export default function ConversationsList() {
 								max={99}
 							>
 								<Avatar
-									src={conv.otherUser.photoUrl || undefined}
+									src={getMediaUrl(conv.otherUser.photoUrl)}
 									sx={{ width: 50, height: 50 }}
 								>
 									{conv.otherUser.name?.charAt(0).toUpperCase()}

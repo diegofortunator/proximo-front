@@ -19,7 +19,7 @@ import {
 	MoreVert as MoreVertIcon,
 } from '@mui/icons-material';
 import { useChatStore } from '../stores/chatStore';
-import { chatApi, uploadApi } from '../services/api';
+import { chatApi, uploadApi, getMediaUrl } from '../services/api';
 import { socketService } from '../services/socket';
 import { useLocationStore } from '../stores/locationStore';
 
@@ -156,7 +156,7 @@ export default function Chat() {
 					</IconButton>
 
 					<Avatar
-						src={otherUser?.photoUrl}
+						src={getMediaUrl(otherUser?.photoUrl)}
 						sx={{ width: 40, height: 40, mx: 1 }}
 					>
 						{otherUser?.name?.charAt(0).toUpperCase()}

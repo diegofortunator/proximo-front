@@ -26,7 +26,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
 import { ptBR } from 'date-fns/locale/pt-BR';
 import { useAuthStore } from '../stores/authStore';
-import { profileApi, uploadApi } from '../services/api';
+import { profileApi, uploadApi, getMediaUrl } from '../services/api';
 
 const maritalStatusOptions = [
 	{ value: 'NOT_INFORMED', label: 'Não informar' },
@@ -150,7 +150,7 @@ export default function EditProfile() {
 							<Box sx={{ textAlign: 'center', mb: 3 }}>
 								<Box sx={{ position: 'relative', display: 'inline-block' }}>
 									<Avatar
-										src={formData.photoUrl || undefined}
+										src={getMediaUrl(formData.photoUrl)}
 										sx={{
 											width: 100,
 											height: 100,

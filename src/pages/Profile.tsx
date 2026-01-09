@@ -74,14 +74,12 @@ export default function Profile() {
 
 	return (
 		<Box sx={{ pb: 2 }}>
-			{/* Header */}
+			{/* Header - barra fina no topo */}
 			<Box
 				sx={{
 					background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-					pt: 4,
-					pb: 8,
+					py: 1,
 					px: 2,
-					position: 'relative',
 				}}
 			>
 				<Container maxWidth="sm">
@@ -89,17 +87,18 @@ export default function Profile() {
 						<IconButton
 							sx={{ color: 'white' }}
 							onClick={() => navigate('/settings')}
+							size="small"
 						>
-							<SettingsIcon />
+							<SettingsIcon fontSize="small" />
 						</IconButton>
 					</Box>
 				</Container>
 			</Box>
 
-			<Container maxWidth="sm" sx={{ mt: -6 }}>
+			<Container maxWidth="sm" sx={{ mt: 2 }}>
 				{/* Card do perfil */}
 				<Card sx={{ mb: 2 }}>
-					<CardContent sx={{ textAlign: 'center', pt: 0 }}>
+					<CardContent sx={{ textAlign: 'center', pt: 3 }}>
 						{/* Avatar */}
 						<Avatar
 							src={user?.profile?.photoUrl || undefined}
@@ -107,9 +106,8 @@ export default function Profile() {
 								width: 100,
 								height: 100,
 								mx: 'auto',
-								mt: -5,
 								border: '4px solid',
-								borderColor: 'background.paper',
+								borderColor: 'primary.main',
 								fontSize: '2.5rem',
 							}}
 						>

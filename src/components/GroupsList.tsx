@@ -6,7 +6,6 @@ import {
 	CardActionArea,
 	Typography,
 	Chip,
-	Button,
 	CircularProgress,
 } from '@mui/material';
 import {
@@ -14,7 +13,7 @@ import {
 	Add as AddIcon,
 	People as PeopleIcon,
 } from '@mui/icons-material';
-import { useGroupStore, Group } from '../stores/groupStore';
+import { useGroupStore } from '../stores/groupStore';
 import { groupsApi } from '../services/api';
 
 export default function GroupsList() {

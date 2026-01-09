@@ -5,21 +5,17 @@ import {
 	Container,
 	Typography,
 	Card,
-	Avatar,
 	Chip,
-	IconButton,
 	Alert,
 	Tabs,
 	Tab,
 	CircularProgress,
-	Fab,
 } from '@mui/material';
 import {
 	Navigation as NavigationIcon,
 	Chat as ChatIcon,
 	Groups as GroupsIcon,
 	LocationOff as LocationOffIcon,
-	Refresh as RefreshIcon,
 } from '@mui/icons-material';
 import { useLocationStore, NearbyUser } from '../stores/locationStore';
 import NearbyUserCard from '../components/NearbyUserCard';
@@ -48,7 +44,7 @@ function TabPanel(props: TabPanelProps) {
 
 export default function Home() {
 	const navigate = useNavigate();
-	const { nearbyUsers, isTracking, error, currentLocation } = useLocationStore();
+	const { nearbyUsers, isTracking, error } = useLocationStore();
 	const [activeTab, setActiveTab] = useState(0);
 	const [viewMode, setViewMode] = useState<'list' | 'radar'>('radar');
 

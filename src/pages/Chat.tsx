@@ -11,7 +11,6 @@ import {
 	InputAdornment,
 	CircularProgress,
 	Paper,
-	Chip,
 } from '@mui/material';
 import {
 	ArrowBack as ArrowBackIcon,
@@ -19,7 +18,7 @@ import {
 	Image as ImageIcon,
 	MoreVert as MoreVertIcon,
 } from '@mui/icons-material';
-import { useChatStore, Message } from '../stores/chatStore';
+import { useChatStore } from '../stores/chatStore';
 import { chatApi, uploadApi } from '../services/api';
 import { socketService } from '../services/socket';
 import { useLocationStore } from '../stores/locationStore';
@@ -87,7 +86,7 @@ export default function Chat() {
 			}
 		});
 
-		socket.on('messageRead', (data: { messageId: string }) => {
+		socket.on('messageRead', (_data: { messageId: string }) => {
 			// Atualizar estado da mensagem
 		});
 	};

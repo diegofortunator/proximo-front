@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
 	Box,
@@ -10,10 +10,7 @@ import {
 	Button,
 	Chip,
 	IconButton,
-	Divider,
 	Switch,
-	FormControlLabel,
-	CircularProgress,
 } from '@mui/material';
 import {
 	Edit as EditIcon,

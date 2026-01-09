@@ -15,7 +15,6 @@ import {
 	ListItemText,
 	ListItemSecondaryAction,
 	Alert,
-	CircularProgress,
 } from '@mui/material';
 import {
 	ArrowBack as ArrowBackIcon,

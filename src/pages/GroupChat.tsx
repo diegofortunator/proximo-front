@@ -7,7 +7,6 @@ import {
 	IconButton,
 	Typography,
 	Avatar,
-	AvatarGroup,
 	TextField,
 	InputAdornment,
 	CircularProgress,

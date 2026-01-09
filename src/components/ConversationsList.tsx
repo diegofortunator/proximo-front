@@ -10,7 +10,7 @@ import {
 	Chip,
 } from '@mui/material';
 import { Chat as ChatIcon } from '@mui/icons-material';
-import { useChatStore, Conversation } from '../stores/chatStore';
+import { useChatStore } from '../stores/chatStore';
 import { chatApi } from '../services/api';
 
 export default function ConversationsList() {

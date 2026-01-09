@@ -43,7 +43,7 @@ interface ChatState {
   markAsRead: (messageId: string) => void;
 }
 
-export const useChatStore = create<ChatState>((set, get) => ({
+export const useChatStore = create<ChatState>((set) => ({
   conversations: [],
   currentMessages: [],
   typingUsers: new Map(),

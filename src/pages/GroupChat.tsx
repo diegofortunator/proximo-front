@@ -269,7 +269,7 @@ export default function GroupChat() {
 								{msg.imageUrl && (
 									<Box
 										component="img"
-										src={msg.imageUrl}
+										src={getMediaUrl(msg.imageUrl)}
 										sx={{
 											maxWidth: '100%',
 											borderRadius: 1,

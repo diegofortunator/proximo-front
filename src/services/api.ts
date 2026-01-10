@@ -53,7 +53,6 @@ export const authApi = {
 // Profile API
 export const profileApi = {
   getMyProfile: () => api.get('/profiles/me'),
-  getProfile: (userId: string) => api.get(`/profiles/${userId}`),
   updateMyProfile: (data: any) => api.put('/profiles/me', data),
   updateProfile: (data: any) => api.put('/profiles/me', data),
   getSettings: () => api.get('/profiles/settings'),

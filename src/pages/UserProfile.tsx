@@ -22,7 +22,7 @@ import {
 	Cake as CakeIcon,
 	LocationOn as LocationOnIcon,
 } from '@mui/icons-material';
-import { profileApi, blocksApi, chatApi, getMediaUrl } from '../services/api';
+import { blocksApi, chatApi, proximityApi, getMediaUrl } from '../services/api';
 
 const maritalStatusLabels: Record<string, string> = {
 	SINGLE: 'Solteiro(a)',
@@ -58,12 +58,17 @@ export default function UserProfile() {
 			if (!userId) return;
 
 			try {
-				const response = await profileApi.getProfile(userId);
+				// Primeiro gera o token de proximidade
+				const tokenResponse = await proximityApi.generateToken(userId);
+				const token = tokenResponse.data.token;
+
+				// Depois busca o perfil usando o token
+				const response = await proximityApi.getProfileByToken(token);
 				setProfile(response.data);
 			} catch (error: any) {
 				console.error('Erro ao carregar perfil:', error);
-				if (error.response?.status === 403) {
-					// Token de proximidade expirado
+				if (error.response?.status === 403 || error.response?.status === 404) {
+					// Usuário fora do raio ou não encontrado
 					navigate('/');
 				}
 			} finally {

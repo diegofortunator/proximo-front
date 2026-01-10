@@ -69,7 +69,7 @@ export default function UserProfile() {
 				console.error('Erro ao carregar perfil:', error);
 				const message = error.response?.data?.message || 'Erro desconhecido';
 				console.error('Mensagem do servidor:', message);
-				
+
 				if (error.response?.status === 403) {
 					// Usuário fora do raio
 					alert('Este usuário está fora do seu raio de proximidade (50m)');

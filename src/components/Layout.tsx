@@ -15,6 +15,7 @@ import {
 } from '@mui/icons-material';
 import { useLocationTracking } from '../hooks/useLocationTracking';
 import { useChatStore } from '../stores/chatStore';
+import DebugLocation from './DebugLocation';
 
 export default function Layout() {
 	const navigate = useNavigate();
@@ -78,6 +79,9 @@ export default function Layout() {
 			>
 				<Outlet />
 			</Box>
+
+			{/* Debug: Simular localização (apenas em dev) */}
+			<DebugLocation />
 
 			{/* Bottom Navigation */}
 			<Paper

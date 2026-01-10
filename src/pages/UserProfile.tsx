@@ -64,11 +64,19 @@ export default function UserProfile() {
 
 				// Depois busca o perfil usando o token
 				const response = await proximityApi.getProfileByToken(token);
-				setProfile(response.data);
+				setProfile(response.data.profile || response.data);
 			} catch (error: any) {
 				console.error('Erro ao carregar perfil:', error);
-				if (error.response?.status === 403 || error.response?.status === 404) {
-					// Usuário fora do raio ou não encontrado
+				const message = error.response?.data?.message || 'Erro desconhecido';
+				console.error('Mensagem do servidor:', message);
+				
+				if (error.response?.status === 403) {
+					// Usuário fora do raio
+					alert('Este usuário está fora do seu raio de proximidade (50m)');
+					navigate('/');
+				} else if (error.response?.status === 404) {
+					// Não encontrado
+					alert('Usuário não encontrado');
 					navigate('/');
 				}
 			} finally {
@@ -84,10 +92,13 @@ export default function UserProfile() {
 
 		setStartingChat(true);
 		try {
-			const response = await chatApi.startConversation(userId);
-			navigate(`/chat/${response.data.id}`);
-		} catch (error) {
+			// Verifica se pode iniciar conversa (proximidade e bloqueio)
+			await chatApi.startConversation(userId);
+			// Navega para o chat com o userId da URL
+			navigate(`/chat/${userId}`);
+		} catch (error: any) {
 			console.error('Erro ao iniciar conversa:', error);
+			alert(error.response?.data?.message || 'Não foi possível iniciar a conversa');
 		} finally {
 			setStartingChat(false);
 		}
@@ -129,21 +140,20 @@ export default function UserProfile() {
 				<Box
 					sx={{
 						background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-						pt: 2,
-						pb: 8,
+						py: 1,
 						px: 2,
 					}}
 				>
 					<Container maxWidth="sm">
-						<IconButton sx={{ color: 'white' }} onClick={() => navigate(-1)}>
-							<ArrowBackIcon />
+						<IconButton sx={{ color: 'white' }} size="small" onClick={() => navigate(-1)}>
+							<ArrowBackIcon fontSize="small" />
 						</IconButton>
 					</Container>
 				</Box>
-				<Container maxWidth="sm" sx={{ mt: -6 }}>
+				<Container maxWidth="sm" sx={{ mt: 2 }}>
 					<Card>
-						<CardContent sx={{ textAlign: 'center', pt: 0 }}>
-							<Skeleton variant="circular" width={100} height={100} sx={{ mx: 'auto', mt: -5 }} />
+						<CardContent sx={{ textAlign: 'center', pt: 3 }}>
+							<Skeleton variant="circular" width={100} height={100} sx={{ mx: 'auto' }} />
 							<Skeleton variant="text" width={150} sx={{ mx: 'auto', mt: 2 }} />
 							<Skeleton variant="text" width={200} sx={{ mx: 'auto' }} />
 							<Skeleton variant="rectangular" height={100} sx={{ mt: 2, borderRadius: 1 }} />
@@ -192,26 +202,25 @@ export default function UserProfile() {
 
 	return (
 		<Box sx={{ pb: 2 }}>
-			{/* Header */}
+			{/* Header - barra fina */}
 			<Box
 				sx={{
 					background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-					pt: 2,
-					pb: 8,
+					py: 1,
 					px: 2,
 				}}
 			>
 				<Container maxWidth="sm">
-					<IconButton sx={{ color: 'white' }} onClick={() => navigate(-1)}>
-						<ArrowBackIcon />
+					<IconButton sx={{ color: 'white' }} size="small" onClick={() => navigate(-1)}>
+						<ArrowBackIcon fontSize="small" />
 					</IconButton>
 				</Container>
 			</Box>
 
-			<Container maxWidth="sm" sx={{ mt: -6 }}>
+			<Container maxWidth="sm" sx={{ mt: 2 }}>
 				{/* Card do perfil */}
 				<Card sx={{ mb: 2 }}>
-					<CardContent sx={{ textAlign: 'center', pt: 0 }}>
+					<CardContent sx={{ textAlign: 'center', pt: 3 }}>
 						{/* Avatar */}
 						<Avatar
 							src={getMediaUrl(profile.photoUrl)}
@@ -219,9 +228,8 @@ export default function UserProfile() {
 								width: 100,
 								height: 100,
 								mx: 'auto',
-								mt: -5,
 								border: '4px solid',
-								borderColor: 'background.paper',
+								borderColor: 'primary.main',
 								fontSize: '2.5rem',
 							}}
 						>
